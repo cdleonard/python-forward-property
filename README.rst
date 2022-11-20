@@ -19,3 +19,6 @@ This is a simple module which implements automatic property forwarding.
         o = Outer()
         o.x = 1
         assert o.inner.x == 1
+
+Documentation is available on `github pages
+<https://cdleonard.github.io/python-forward-property/docs>`__
