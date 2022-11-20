@@ -1,9 +1,10 @@
 Python Forward Property
 =======================
 
-This is a simple module which implements automatic property forwarding. Like this:
+This is a simple module which implements automatic property forwarding.
 
-```
+.. code:: python
+
     class Inner:
         int x = 0
 
@@ -11,8 +12,10 @@ This is a simple module which implements automatic property forwarding. Like thi
         Inner: inner
         x = forward_property("inner")
 
+        def __init__(self):
+            self.inner = Inner()
+
     def test():
-        o = Outer
+        o = Outer()
         o.x = 1
         assert o.inner.x == 1
-```
