@@ -1,6 +1,8 @@
 from types import SimpleNamespace
 
-from forward_property import forward_property
+from typing_extensions import assert_type
+
+from forward_property import forward_property, typed_forward_property
 
 
 class Inner:
@@ -66,3 +68,22 @@ def test_setattr_return():
     o = Outer()
     b = o.x = "hello"
     assert b == "hello"
+
+
+class OuterTyped:
+    inner: Inner
+
+    x = typed_forward_property[str]("inner", "x")
+    y = typed_forward_property[int]("inner", "y")
+
+    def __init__(self):
+        self.inner = Inner()
+
+
+def test_typed():
+    o = OuterTyped()
+    o.x = "aaa"
+    assert_type(o.x, str)
+    o2 = OuterTyped()
+    assert o2.x == ""
+    assert_type(o2.y, int)
