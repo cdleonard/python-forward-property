@@ -12,6 +12,7 @@ Homepage = "https://github.com/cdleonard/python-forward-property"
 [project.optional-dependencies]
 test = [
     "pytest",
+    "typing_extensions",
 ]
 hack = [
     "black",
