@@ -1,3 +1,4 @@
+from dataclasses import dataclass, field
 from types import SimpleNamespace
 
 from typing_extensions import assert_type
@@ -87,3 +88,21 @@ def test_typed():
     o2 = OuterTyped()
     assert o2.x == ""
     assert_type(o2.y, int)
+
+
+@dataclass
+class OuterAutoName:
+    inner: Inner = field(default_factory=Inner)
+
+    x = forward_property("inner")
+    y = typed_forward_property[int]("inner")
+
+
+def test_auto_name():
+    o = OuterAutoName()
+    o.x = "aaa"
+    assert o.inner.x == "aaa"
+    o.y = 123
+    assert o.inner.y == 123
+    o2 = OuterAutoName()
+    assert o2.x == ""
