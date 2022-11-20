@@ -9,10 +9,20 @@ class Inner:
 
 
 class Outer:
-    inner = Inner()
+    inner: Inner
 
     x = forward_property("inner", "x")
     y = forward_property("inner", "y")
+
+    def __init__(self):
+        self.inner = Inner()
+
+
+def test_inner_distinct():
+    o1 = Outer()
+    o1.y = 1
+    o2 = Outer()
+    assert o2.y == 0
 
 
 def test():
