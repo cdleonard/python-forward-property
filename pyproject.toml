@@ -13,12 +13,14 @@ Homepage = "https://github.com/cdleonard/python-forward-property"
 test = [
     "pytest",
     "typing_extensions",
+    "mypy",
+    # See https://github.com/davidfritzsche/pytest-mypy-testing/issues/35
+    "pytest-mypy-testing@git+https://github.com/davidfritzsche/pytest-mypy-testing@031514ff6ecd5bdf4d11ff238c14d4801b5e47f3",
 ]
 hack = [
     "black",
     "pre-commit",
     "flit",
-    "mypy",
 ]
 
 [build-system]
@@ -32,6 +34,8 @@ name = "forward_property"
 ignore_missing_imports = true
 check_untyped_defs = true
 files = "."
+# Exclude tests for mypy itself
+exclude = "_mypy_test.py"
 
 [tool.isort]
 profile = "black"
