@@ -47,3 +47,12 @@ def test_del_other():
     assert getattr(z, "z", None) == "zzz"
     del z.z
     assert getattr(z, "z", None) is None
+
+
+def test_setattr_return():
+    i = Inner()
+    a = i.x = "hello"
+    assert a == "hello"
+    o = Outer()
+    b = o.x = "hello"
+    assert b == "hello"
